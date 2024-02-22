@@ -46,7 +46,7 @@ public class HostGameManager : MonoBehaviour
 
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
 
-        RelayServerData relayServerData = new RelayServerData(allocation, "udp");
+        RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
         transport.SetRelayServerData(relayServerData);
 
         try
@@ -62,7 +62,7 @@ public class HostGameManager : MonoBehaviour
                 }
             };
             Lobby lobby = await Lobbies.Instance.CreateLobbyAsync(
-                "My Lobby", Int32.MaxValue, lobbyOptions);
+                "My Lobby", MaxConnection, lobbyOptions);
             lobbyId = lobby.Id;
             HostSingleton.Instance.StartCoroutine(HeartbeatLobby(15));
         }
